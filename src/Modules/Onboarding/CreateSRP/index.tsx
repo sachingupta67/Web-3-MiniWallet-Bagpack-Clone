@@ -39,14 +39,16 @@ const CSRP = () => {
         <h6 className="text-center text-neutral-400">
           Save these words in a safe place.
         </h6>
-        <h6
+       <div className="flex items-center justify-center">
+       <span
           className="text-center text-blue-500 hover:text-blue-500/90 cursor-pointer"
           onClick={() => {
             navigate(ROUTES.secretRecoveryPhase);
           }}
         >
           Read the warnings again
-        </h6>
+        </span>
+       </div>
       </div>
       <div className="flex items-center justify-center flex-col">
         <div  className=" rounded-md pt-4 bg-neutral-600 pb-2 cursor-pointer " onClick={handleCopyClick} >
