@@ -1,10 +1,17 @@
+import ROUTES from "./constants/routes";
 import { Welcome, SelectNetwork } from "./Modules/Onboarding";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SecretRecoveryPhase from "./Modules/Onboarding/SecretRecoveryPhase";
 
 export default function Home() {
   return (
-    <div className="bg-dark">
-      <Welcome />
-      <SelectNetwork/>
-    </div>
+      <Router>
+      <Routes>
+        <Route path={ROUTES.welcome} element={<Welcome />} />
+        <Route path={ROUTES.selectNetwork} element={<SelectNetwork />} />
+        <Route path={ROUTES.secretRecoveryPhase} element={<SecretRecoveryPhase />} />
+      </Routes>
+    </Router>
+
   );
 }
