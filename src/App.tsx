@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button"
+import { Welcome, SelectNetwork } from "./Modules/Onboarding";
 
 export default function Home() {
   return (
-    <div>
-      <Button onClick={()=>alert('hello')}>Click me</Button>
+    <div className="bg-dark">
+      <Welcome />
+      <SelectNetwork/>
     </div>
-  )
+  );
 }
