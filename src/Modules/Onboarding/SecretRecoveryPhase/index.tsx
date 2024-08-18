@@ -1,6 +1,13 @@
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import ROUTES from "@/constants/routes";
 import { TriangleAlert,LockKeyhole} from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SecretRecoveryPhase = () => {
+  const [checked,setChecked] = useState(false)
+  const navigate = useNavigate()
   return (
     <div className="">
       <div className="mt-40 mb-10">
@@ -26,6 +33,17 @@ const SecretRecoveryPhase = () => {
             <h6 className="text-neutral-400">Write it down, store it in a safe place, and </h6>
             <h6 className="text-neutral-400"><span className="text-white">NEVER</span> share it with anyone.</h6>
           </div>
+        </div>
+        <div className ="w-[400px] mt-5 justify-start gap-5 h-18 flex items-center pl-6 pr-6 pt-4 pb-4 rounded-md ">
+          <Checkbox className="bg-white hover:bg-slate-200/90 w-[20px] h-[20px]" checked={checked} onClick={()=>setChecked(!checked)} />
+          <div >
+            <p className="text-neutral-400">I understand that I am responsible for saving my secret recovery phrase, and that it is the only way to recover my wallet. </p>
+          </div>
+        </div>
+        <div className ="w-[300px]  justify-start gap-5 h-18 flex items-center pl-6 pr-6 pt-4 pb-4 rounded-md mb-5">
+        <Button  disabled={!checked} className="w-[200px] h-[50px] mb-4 bg-white text-black hover:bg-white/70" onClick={()=>{
+          navigate(ROUTES.createSRP)
+        }}>Next</Button>
         </div>
       </div>
     </div>
