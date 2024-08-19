@@ -1,3 +1,4 @@
+import React from "react";
 import ROUTES from "./constants/routes";
 import {
   Welcome,
@@ -7,9 +8,9 @@ import {
   CSRP,
 } from "./Modules/Onboarding";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React from "react";
+import { Home } from "./Modules/Private";
 
-export default function Home() {
+export default function App() {
   return (
     <Router>
       <Routes>
@@ -21,6 +22,7 @@ export default function Home() {
         />
         <Route path={ROUTES.createSRP} element={<CSRP />} />
         <Route path={ROUTES.createPassword} element={<CreatePassword />} />
+        <Route path={ROUTES.home} element={<Home />} />
       </Routes>
     </Router>
   );

@@ -12,6 +12,10 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
+import { saveDataToLocalStorage } from "@/utils/localStorage";
+import { LC_CONST } from "@/constants/localStorage";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "@/constants/routes";
 
 const FormSchema = z
   .object({
@@ -24,8 +28,6 @@ const FormSchema = z
   })
   .refine(
     (data) => {
-      // This will only be checked if the previous min length checks pass
-      console.log("Data:::", data); // Should log the correct structure
       return data.password === data.confirmPassword;
     },
     {
@@ -35,7 +37,8 @@ const FormSchema = z
   );
 
 function CreatePassword() {
-  const [isChecked,setIsChecked] = useState(false);
+  const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -47,7 +50,9 @@ function CreatePassword() {
 
   // Define the onSubmit function to handle form submission
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    saveDataToLocalStorage(LC_CONST.CRED, data.confirmPassword);
+    navigate(ROUTES.home) // once logged in need to navigate to Home 
+
   }
 
   return (
@@ -75,7 +80,11 @@ function CreatePassword() {
                   return (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Enter Password" {...field} className="bg-neutral-300" />
+                        <Input
+                          placeholder="Enter Password"
+                          {...field}
+                          className="bg-neutral-300"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -89,7 +98,11 @@ function CreatePassword() {
                   return (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Confirm Password" {...field} className="bg-neutral-300"  />
+                        <Input
+                          placeholder="Confirm Password"
+                          {...field}
+                          className="bg-neutral-300"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -97,11 +110,24 @@ function CreatePassword() {
                 }}
               />
               <div className="flex justify-center items-center pt-10">
-                <Checkbox checked={isChecked} className="bg-white checked:bg-blue mr-2" onClick={()=>setIsChecked(!isChecked)}/>
-                <span className="text-neutral-400">I agree to the <span className="text-blue-500">Terms of service</span></span>   
+                <Checkbox
+                  checked={isChecked}
+                  className="bg-white checked:bg-blue mr-2"
+                  onClick={() => setIsChecked(!isChecked)}
+                />
+                <span className="text-neutral-400">
+                  I agree to the{" "}
+                  <span className="text-blue-500">Terms of service</span>
+                </span>
               </div>
               <div className="flex justify-center items-center">
-              <Button type="submit" disabled={!isChecked} className="w-[250px] bg-white text-black-400 hover:bg-white/90">Submit</Button>
+                <Button
+                  type="submit"
+                  disabled={!isChecked}
+                  className="w-[250px] bg-white text-black-400 hover:bg-white/90"
+                >
+                  Submit
+                </Button>
               </div>
             </form>
           </Form>
