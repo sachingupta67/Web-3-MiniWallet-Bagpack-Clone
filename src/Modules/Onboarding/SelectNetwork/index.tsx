@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 const SelectNetwork = () => {
   const navigate = useNavigate();

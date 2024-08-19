@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import { Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 const Welcome = () => {
   const navigate = useNavigate()

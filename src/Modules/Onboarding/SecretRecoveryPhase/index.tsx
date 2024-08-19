@@ -4,6 +4,7 @@ import ROUTES from "@/constants/routes";
 import { TriangleAlert,LockKeyhole} from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 const SecretRecoveryPhase = () => {
   const [checked,setChecked] = useState(false)
