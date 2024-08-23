@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import ROUTES from "@/constants/routes";
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { generateMnemonic } from "bip39";
-import React from 'react';
+import React from "react";
 
 const CSRP = () => {
+  const location = useLocation();
   const [checked, setChecked] = useState(false);
   const [copy, setCopy] = useState("");
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const CSRP = () => {
   };
 
   useEffect(() => {
-    generateMnemonicHandler()
+    generateMnemonicHandler();
   }, []);
 
   const handleCopyClick = () => {
@@ -52,9 +53,9 @@ const CSRP = () => {
         console.error("Failed to copy text: ", error);
       });
   };
-if(isLoading) {
-  return <h3 className="text-neutral-400">Loading...</h3>
-}
+  if (isLoading) {
+    return <h3 className="text-neutral-400">Loading...</h3>;
+  }
 
   return (
     <div className="">
@@ -108,7 +109,9 @@ if(isLoading) {
             disabled={!checked}
             className="w-[200px] h-[50px] mb-4 bg-white text-black hover:bg-white/70"
             onClick={() => {
-              navigate(ROUTES.createPassword);
+              navigate(ROUTES.createPassword, {
+                state: { ...location.state, phrase: mnemonic },
+              });
             }}
           >
             Next

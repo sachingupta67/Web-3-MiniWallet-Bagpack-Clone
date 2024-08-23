@@ -14,8 +14,11 @@ import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { saveDataToLocalStorage } from "@/utils/localStorage";
 import { LC_CONST } from "@/constants/localStorage";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ROUTES from "@/constants/routes";
+import { useAppDispatch } from "@/core/redux";
+import { createPasswordAction } from "@/core/redux/reducers/globalSlice";
+import useAccount from "@/utils/hooks/useAccounts";
 
 const FormSchema = z
   .object({
@@ -37,6 +40,9 @@ const FormSchema = z
   );
 
 function CreatePassword() {
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const { createAccount } = useAccount();
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -51,8 +57,9 @@ function CreatePassword() {
   // Define the onSubmit function to handle form submission
   function onSubmit(data: z.infer<typeof FormSchema>) {
     saveDataToLocalStorage(LC_CONST.CRED, data.confirmPassword);
-    navigate(ROUTES.home) // once logged in need to navigate to Home 
-
+    createAccount({ ...location.state }); // create account with password
+    dispatch(createPasswordAction(data.confirmPassword));
+    navigate(ROUTES.home); // once logged in need to navigate to Home
   }
 
   return (
