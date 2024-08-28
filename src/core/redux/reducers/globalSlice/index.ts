@@ -5,6 +5,8 @@ import { RootState } from "../..";
 type IAccounts = {
   wallets?: [];
   phrase?: string;
+  network?: string[];
+  name?: string;
 };
 
 interface IGlobalSlice {
@@ -50,7 +52,7 @@ export const {
   createPasswordAction,
   createAccountAction,
   createFreshAccountNetworkWallet,
-  setCurrentAccountStatus
+  setCurrentAccountStatus,
 } = globalSlice.actions;
 export const globalSliceSelector = (state: RootState) => state.globalSlice;
 export default globalSlice.reducer;

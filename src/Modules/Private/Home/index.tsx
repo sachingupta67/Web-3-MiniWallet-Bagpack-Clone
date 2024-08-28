@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import Wallet from "../Wallet";
 
-
-const Home = () => {
+const Home:React.FC = () => {
   return (
-    <div className='text-white'>
-      Home
+    <div className="text-white">
+      <Wallet />
     </div>
   );
 };

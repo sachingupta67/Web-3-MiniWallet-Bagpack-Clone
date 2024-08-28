@@ -6,10 +6,11 @@ import {
 } from "@/core/redux/reducers/globalSlice";
 import { useSelector } from "react-redux";
 import useSolanaWallet from "./useSolanaWallet";
+import { BLOCKCHAIN_NETWORKS } from "@/constants/global";
 
 const useAccount = () => {
   const { createSolanaWallet } = useSolanaWallet();
-  const { accounts } = useSelector(globalSliceSelector);
+  const { accounts, current } = useSelector(globalSliceSelector);
   const dispatch = useAppDispatch();
 
   const createAccount = ({ network = "", phrase = "" }) => {
@@ -34,9 +35,35 @@ const useAccount = () => {
     dispatch(createFreshAccountNetworkWallet(payload));
   };
 
+  const currentAccountDetails = () => {
+    const currentAcIndex = current.accountIndex || 0;
+    const currentWalletIndex = current.walletIndex || 0;
+    const currentNetwork = current.network || "";
+    const currentAccount = accounts[currentAcIndex];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let currentWallets: any = [];
+
+    if (currentAccount.wallets?.length && currentNetwork) {
+      currentWallets =
+        currentAccount.wallets[currentWalletIndex][currentNetwork];
+    }
+
+    return {
+      currentWallets,
+      currentWalletIndex: currentAcIndex + 1,
+      accountName: currentAccount.name || `A${currentWalletIndex + 1}`,
+      currentNetwork: BLOCKCHAIN_NETWORKS.find(
+        (item) => item.id === currentNetwork
+      ),
+    };
+  };
+
   //   const updateSecurityPhrase = (phrase = "") => {};
-  return { createAccount, createSolanaWallet };
+  return {
+    createAccount,
+    createSolanaWallet,
+    currentAccountDetails,
+  };
 };
 
 export default useAccount;
-
