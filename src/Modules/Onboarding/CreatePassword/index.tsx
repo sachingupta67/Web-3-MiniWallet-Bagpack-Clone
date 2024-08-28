@@ -39,7 +39,7 @@ const FormSchema = z
     }
   );
 
-function CreatePassword() {
+const CreatePassword: React.FC = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { createAccount } = useAccount();
@@ -143,6 +143,6 @@ function CreatePassword() {
       <div className="flex items-center justify-center flex-col">Hello</div>
     </div>
   );
-}
+};
 
 export default CreatePassword;
