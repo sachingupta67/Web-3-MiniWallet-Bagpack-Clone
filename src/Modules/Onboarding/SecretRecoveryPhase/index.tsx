@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 
-const SecretRecoveryPhase = () => {
+const SecretRecoveryPhase:React.FC = () => {
   const location = useLocation();
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();

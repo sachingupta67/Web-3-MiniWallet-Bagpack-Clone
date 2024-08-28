@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { BLOCKCHAIN_NETWORKS } from "@/constants/global";
 
-const SelectNetwork = () => {
+const SelectNetwork:React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className="">

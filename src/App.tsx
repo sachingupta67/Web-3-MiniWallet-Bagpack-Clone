@@ -10,7 +10,7 @@ import {
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./Modules/Private";
 
-export default function App() {
+const App:React.FC=()=> {
   return (
     <Router>
       <Routes>
@@ -27,3 +27,5 @@ export default function App() {
     </Router>
   );
 }
+
+export default App;

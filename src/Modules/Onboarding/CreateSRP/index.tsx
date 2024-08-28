@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { generateMnemonic } from "bip39";
 import React from "react";
 
-const CSRP = () => {
+const CSRP:React.FC = () => {
   const location = useLocation();
   const [checked, setChecked] = useState(false);
   const [copy, setCopy] = useState("");

@@ -7,12 +7,19 @@ import React from "react";
 import store, { persistor } from "./core/redux/index.ts";
 import { PersistGate } from "redux-persist/integration/react";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+// eslint-disable-next-line react-refresh/only-export-components
+const MainApp:React.FC = () => {
+  return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
+  );
+};
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <MainApp />
   </StrictMode>
 );

@@ -4,7 +4,7 @@ import { Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
-const Welcome = () => {
+const Welcome:React.FC = () => {
   const navigate = useNavigate();
   
   return (
