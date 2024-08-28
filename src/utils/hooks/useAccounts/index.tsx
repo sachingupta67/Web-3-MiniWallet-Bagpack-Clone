@@ -41,11 +41,11 @@ const useAccount = () => {
     const currentNetwork = current.network || "";
     const currentAccount = accounts[currentAcIndex];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let currentWallets: any = [];
+    let currentWallets: any = []
 
-    if (currentAccount.wallets?.length && currentNetwork) {
+    if (currentAccount.wallets && currentNetwork) {
       currentWallets =
-        currentAccount.wallets[currentWalletIndex][currentNetwork];
+        currentAccount.wallets[currentNetwork as any][currentWalletIndex];
     }
 
     return {
